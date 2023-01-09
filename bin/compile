@@ -10,6 +10,8 @@ function indent() {
     sed -e 's/^/       /'
 }
 
+BIN_DIR=$(cd "$(dirname "$0")"; pwd) # absolute path
+
 export BUILD_DIR="$1"
 export ENV_DIR="$3"
 
@@ -89,9 +91,8 @@ if [ -z "${PYTHON_RUNTIME_VERSION:-}" ] ; then
     log "Read Python version from poetry.lock"
     PYTHON_RUNTIME_VERSION="$(sed -n -e '/^\[metadata\]/,/^\[/p' poetry.lock | sed -n -e 's/^python-versions\s*=\s*//p' | tr -d \"\')"
 
+    # If Python version is specified as "~3.11", use the latest Python 3.11.x version
     if [[ "$PYTHON_RUNTIME_VERSION" =~ ^~3\.([0-9]+)$ ]] ; then
-        # If Python version is specified as "~3.11", use the latest Python 3.11.x version
-        BIN_DIR=$(cd "$(dirname "$0")"; pwd) # absolute path
         # shellcheck source=bin/default_pythons
         source "$BIN_DIR/default_pythons"
         LATEST_VERSION_VAR="LATEST_3${BASH_REMATCH[1]}"  # The variable name in default_pythons

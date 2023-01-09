@@ -94,9 +94,9 @@ if [ -z "${PYTHON_RUNTIME_VERSION:-}" ] ; then
         BIN_DIR=$(cd "$(dirname "$0")"; pwd) # absolute path
         # shellcheck source=bin/default_pythons
         source "$BIN_DIR/default_pythons"
-        LATEST_PYTHON_RUNTIME_VERSION="${LATEST_3${BASH_REMATCH[1]}}"
-        log "Found Python $PYTHON_RUNTIME_VERSION in poetry.lock, using Heroku's latest Python $LATEST_PYTHON_RUNTIME_VERSION"
-        PYTHON_RUNTIME_VERSION="$LATEST_PYTHON_RUNTIME_VERSION"
+        LATEST_VERSION_VAR="LATEST_3${BASH_REMATCH[1]}"  # The variable name in default_pythons
+        log "Found Python $PYTHON_RUNTIME_VERSION in poetry.lock, using Heroku's latest Python ${!LATEST_VERSION_VAR}"
+        PYTHON_RUNTIME_VERSION="${!LATEST_VERSION_VAR}"
     fi
 else
     log "Force Python version to $PYTHON_RUNTIME_VERSION, because PYTHON_RUNTIME_VERSION is set!"

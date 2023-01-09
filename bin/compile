@@ -10,10 +10,10 @@ function indent() {
     sed -e 's/^/       /'
 }
 
-BIN_DIR=$(cd "$(dirname "$0")"; pwd) # absolute path
-
 export BUILD_DIR="$1"
 export ENV_DIR="$3"
+
+BIN_DIR=$(cd "$(dirname "$0")"; pwd) # absolute path
 
 BUILDPACK_VARIABLES="DISABLE_POETRY_CREATE_RUNTIME_FILE PYTHON_RUNTIME_VERSION"
 

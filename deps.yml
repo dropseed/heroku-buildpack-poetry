@@ -9,7 +9,7 @@ dependencies:
         act: |
           POETRY_LATEST=$(curl -s https://api.github.com/repos/python-poetry/poetry/releases/latest | jq -r '.tag_name')
           sed -i "s/POETRY_VERSION=.*/POETRY_VERSION=$POETRY_LATEST/" bin/compile
-          find test/fixtures -type f -exec sed -i "s/Defaulting to [0-9.]\+/Defaulting to $POETRY_LATEST/" {} +
+          find test/fixtures -type f -exec sed -i "s/Defaulting to [0-9.]\+/Defaulting to $POETRY_LATEST./" {} +
       default-pythons:
         collect:
           md5sum bin/default_pythons | cut -c 1-7

@@ -1,0 +1,16 @@
+version: 3
+dependencies:
+- type: manual
+  settings:
+    deps:
+      poetry-version:
+        collect: |
+          grep 'POETRY_VERSION=' bin/compile | cut -d '=' -f 2 | md5sum | cut -c 1-7
+        act: |
+          POETRY_LATEST=$(curl -s https://api.github.com/repos/python-poetry/poetry/releases/latest | jq -r '.tag_name')
+          sed -i "s/POETRY_VERSION=.*/POETRY_VERSION=$POETRY_LATEST/" bin/compile
+      python-version:
+        collect:
+          md5sum bin/default_pythons | cut -c 1-7
+        act:
+          curl https://raw.githubusercontent.com/heroku/heroku-buildpack-python/main/bin/default_pythons -o bin/default_pythons

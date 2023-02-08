@@ -5,11 +5,11 @@ dependencies:
     deps:
       poetry-version:
         collect: |
-          grep 'POETRY_VERSION=' bin/compile | cut -d '=' -f 2 | md5sum | cut -c 1-7
+          grep 'POETRY_VERSION=' bin/compile | cut -d '=' -f 2
         act: |
           POETRY_LATEST=$(curl -s https://api.github.com/repos/python-poetry/poetry/releases/latest | jq -r '.tag_name')
           sed -i "s/POETRY_VERSION=.*/POETRY_VERSION=$POETRY_LATEST/" bin/compile
-      python-version:
+      default-pythons:
         collect:
           md5sum bin/default_pythons | cut -c 1-7
         act:

@@ -28,7 +28,7 @@ for env_file in $BUILDPACK_VARIABLES ; do
 done
 
 if [ -z "${POETRY_VERSION:-}" ] ; then
-    export POETRY_VERSION=1.4.2
+    export POETRY_VERSION=1.5.0
     log "No Poetry version specified in POETRY_VERSION config var. Defaulting to $POETRY_VERSION."
 else
     log "Using Poetry version from POETRY_VERSION config var: $POETRY_VERSION"

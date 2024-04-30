@@ -7,5 +7,5 @@
        >>> mocked poetry call <<<
 -----> Export Python version from Poetry to Heroku runtime.txt file
 -----> Read Python version from poetry.lock
------> Found Python ~3.8 in poetry.lock, using Heroku's latest Python 3.8.18
------> Write 3.8.18 into runtime.txt
+-----> Found Python ~3.8 in poetry.lock, using Heroku's latest Python 3.8.19
+-----> Write 3.8.19 into runtime.txt
